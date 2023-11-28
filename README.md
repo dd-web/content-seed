@@ -1,6 +1,8 @@
 # Content-Seed
 go content/text generation tool for rapid application prototyping.
 
+*NOTE* this is very new for me. I made this for myself so I don't need to keep doing it for new projects every time. Feel free to use and I'll do the best I can to update and maintain. Updates coming soon.
+
 ## Install
 
 Using go get
