@@ -93,6 +93,20 @@ func MaxSentenceLength(i int) ConfigurFunc {
 	}
 }
 
+func MinParagraphLength(i int) ConfigurFunc {
+	return func(c *Config) *Config {
+		c.minParagraphSentenceCount = i
+		return c
+	}
+}
+
+func MaxParagraphLength(i int) ConfigurFunc {
+	return func(c *Config) *Config {
+		c.maxParagraphSentenceCount = i
+		return c
+	}
+}
+
 func MinParagraphCount(i int) ConfigurFunc {
 	return func(c *Config) *Config {
 		c.minParagraphCount = i
@@ -117,6 +131,13 @@ func CapitalizeSentences(b bool) ConfigurFunc {
 func PunctuateSentences(b bool) ConfigurFunc {
 	return func(c *Config) *Config {
 		c.punctuateSentences = b
+		return c
+	}
+}
+
+func IndentParagraphs(b bool) ConfigurFunc {
+	return func(c *Config) *Config {
+		c.indentParagraphs = b
 		return c
 	}
 }
@@ -202,10 +223,12 @@ func (l *ContentSeed) paragraph() string {
 		}
 		paragraph += l.sentence()
 	}
+
 	return paragraph + l.config.paragraphDelimiter
 }
 
-func (l *ContentSeed) Generate() string {
+// Combines all methods to generate multiple paragraphs of random text using the config settings.
+func (l *ContentSeed) GeneratePassage() string {
 	paragraphs := ""
 	paragraphCount := randomBetween[int](l.config.minParagraphCount, l.config.maxParagraphCount)
 	for i := 0; i < paragraphCount; i++ {
@@ -213,6 +236,27 @@ func (l *ContentSeed) Generate() string {
 	}
 
 	l.Output = paragraphs
+	return l.Output
+}
+
+// Generates a single paragraph of random text using the config settings.
+func (l *ContentSeed) GenerateParagraph() string {
+	paragraph := l.paragraph()
+	l.Output = paragraph
+	return l.Output
+}
+
+// Generates a single sentence of random text using the config settings.
+func (l *ContentSeed) GenerateSentence() string {
+	sentence := l.sentence()
+	l.Output = sentence
+	return l.Output
+}
+
+// Generates a single word of random text using the config settings.
+func (l *ContentSeed) GenerateWord() string {
+	word := l.word()
+	l.Output = word
 	return l.Output
 }
 
