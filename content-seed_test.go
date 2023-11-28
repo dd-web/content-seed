@@ -18,6 +18,10 @@ func TestUnmodifiedSeeder(t *testing.T) {
 }
 
 func BenchmarkUnmodifiedSeeder(b *testing.B) {
-	seeder := NewContentSeed()
-	_ = seeder.Generate()
+
+	for i := 0; i < b.N; i++ {
+		seeder := NewContentSeed()
+		_ = seeder.Generate()
+	}
+
 }

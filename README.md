@@ -20,3 +20,4 @@ seeder := NewContentSeed()
 output := seeder.Generate()
 	fmt.Printf("%s = %s" ,output, seeder.Output)
 ```
+
