@@ -1,8 +1,6 @@
 # Content-Seed
 go content/text generation tool for rapid application prototyping.
 
-*NOTE* this is very new for me. I made this for myself so I don't need to keep doing it for new projects every time. Feel free to use and I'll do the best I can to update and maintain. Updates coming soon. If anyone willing to help me/teach me how to do this library and maintainer stuff please send me a message.
-
 ## Install
 
 Using go get
@@ -36,6 +34,14 @@ Each time they are called, the Output field is overridden by the newly generated
 
 Some configuration options aren't used for all of these, for instance sentence punctuation does nothing when generating a single word. For cases like that you can just leave them at their default.
 
+Pass configuration functions directly when instantiating an instance.
+
+```go
+seeder := NewContentSeed(MinWordLength(1), MaxParagraphLength(5))
+output := seeder.GenerateParagraph()
+	fmt.Printf("%s = %s", output, seeder.Output)
+```
+
 ### Word Config
 
  - `MinWordLength(i int)` minimum character count each generated word must have
@@ -57,6 +63,3 @@ Some configuration options aren't used for all of these, for instance sentence p
  - `IndentParagraphs(b bool)` if true each new paragraph will begin with an indentation (two spaces)
 
 
-## Additional Notes
-
-this is heavily WIP. API's will change frequently and stuff will break. 
